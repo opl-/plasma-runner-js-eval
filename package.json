@@ -1,0 +1,14 @@
+{
+  "name": "dbus-weather",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "opl",
+  "license": "MIT",
+  "dependencies": {
+    "dbus-native": "^0.4.0"
+  }
+}

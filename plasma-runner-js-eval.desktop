@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=JavaScript Eval
+Type=Service
+X-DBUS-StartupType=Unique
+X-DBUS-ServiceName=opl.KRunnerJSEval
+
+Comment=Allows executing JavaScript in KRunner
+
+X-KDE-ServiceTypes=Plasma/Runner
+X-KDE-StartupNotify=false
+X-KDE-Library=KRunnerJSEval
+X-KDE-PluginInfo-Author=opl
+X-KDE-PluginInfo-Name=krunner-jseval
+X-KDE-PluginInfo-Version=1.0.0
+X-KDE-PluginInfo-License=MIT
+X-KDE-PluginInfo-EnabledByDefault=true
+
+X-Plasma-API=DBus
+X-Plasma-DBusRunner-Service=opl.KRunnerJSEval
+X-Plasma-DBusRunner-Path=/opl/KRunnerJSEval/JSEval
