@@ -153,7 +153,7 @@ createKRunnerInterface({
 		if (parsedQuery[1]) {
 			return Object.entries(commands)
 				.filter(([key]) => key.startsWith(query))
-				.map(([key, {name, icon}]) => [`command.${key}`, name, icon || 'code-variable', 1, query === key ? 100 : 10, {}]);
+				.map(([key, {name, icon}]) => [`command.${key}`, name, icon || 'code-variable', query === key ? 100 : 10, 1, {}]);
 		}
 
 		// Handle code evaluation
@@ -169,9 +169,9 @@ createKRunnerInterface({
 				breakLength: Infinity,
 				compact: true,
 				colors: false,
-			}), 'code-variable', 1, 70, {}]];
+			}), 'code-variable', 70, 1, {}]];
 		} catch (ex) {
-			return [['js-eval-error', (ex || {}).message || `Unknown error message`, 'code-variable', 1, 50, {}]];
+			return [['js-eval-error', (ex || {}).message || `Unknown error message`, 'code-variable', 50, 1, {}]];
 		}
 	},
 });
