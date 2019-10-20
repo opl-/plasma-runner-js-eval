@@ -30,7 +30,7 @@ module.exports.createKRunnerInterface = function({path, actionsHandler, runHandl
 
 	if (matchHandler) {
 		interface.Match = matchHandler;
-		interfaceDesc.methods.Match = ['s', 'a(sssuda{sv})', ['query'], ['matches']];
+		interfaceDesc.methods.Match = ['s', 'a(sssida{sv})', ['query'], ['matches']];
 	}
 
 	sessionBus.exportInterface(interface, path, interfaceDesc);
