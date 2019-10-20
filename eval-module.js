@@ -60,7 +60,7 @@ const predefinedGlobals = {
 	},
 	makeArr(length, callback, ...args) {
 		const arr = [];
-		for (let i = 0; i < length; i++) arr.push(callback(...args));
+		for (let i = 0; i < length; i++) arr.push(callback(i, arr, ...args));
 		return arr;
 	},
 	log(...args) {
