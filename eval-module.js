@@ -64,19 +64,21 @@ const predefinedGlobals = {
 		return arr;
 	},
 	log(...args) {
-		const output = args.length === 0 ? undefined : args.length === 1 ? args[0] : args;
+		const value = args.length <= 1 ? args[0] : args;
 
-		if (!reallyEvaling) return output;
+		if (reallyEvaling) {
+			sendNotification({
+				summary: 'log()',
+				body: util.inspect(value, {
+					colors: false,
+					compact: true,
+					breakLength: 100,
+					depth: Infinity,
+				}),
+			});
+		}
 
-		sendNotification({
-			summary: 'log()',
-			body: util.inspect(output, {
-				colors: false,
-				compact: true,
-				breakLength: 100,
-				depth: Infinity,
-			}),
-		});
+		return value;
 	},
 };
 
