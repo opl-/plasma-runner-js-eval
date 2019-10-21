@@ -75,7 +75,7 @@ const predefinedGlobals = {
 				compact: true,
 				breakLength: 100,
 				depth: Infinity,
-			}).replace(/^( +)/g, (match) => match[1].replace(' ', '\u00a0')), // FIXME: doesn't make the indentation show up
+			}),
 		});
 	},
 };
