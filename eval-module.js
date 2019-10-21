@@ -80,13 +80,14 @@ const predefinedGlobals = {
 	},
 };
 
-// FIXME: this is gonna die on any circular dependencies, isn't it...
-function deepClone(val) {
-	if (Array.isArray(val)) {
-		return val.map((v) => deepClone(v));
-	} else if (val !== null && typeof val === 'object') {
+function deepClone(val, processed = []) {
+	if (Array.isArray(val) && !processed.includes(val)) {
+		processed.push(val);
+		return val.map((v) => deepClone(v, processed));
+	} else if (val !== null && typeof val === 'object' && !processed.includes(val)) {
+		processed.push(val);
 		return Object.entries(val).reduce((acc, [key, value]) => {
-			acc[key] = deepClone(value);
+			acc[key] = deepClone(value, processed);
 			return acc;
 		}, {});
 	}
