@@ -8,6 +8,10 @@ let currentContext = null;
 let lastCode = '';
 let reallyEvaling = false;
 
+function delay(time, callback) {
+	return new Promise((resolve) => setTimeout(() => resolve(callback()), time));
+}
+
 // Notification issuing
 let notifyMethod = null;
 
@@ -114,23 +118,31 @@ const commands = {
 };
 
 // Code evaluation
-function evalCode(code, context) {
-	return vm.runInNewContext(code, context, {
+async function evalCode(code, context) {
+	const result = vm.runInNewContext(code, context, {
 		filename: 'krunner.js',
 		timeout: 1000,
 		breakOnSigint: true,
 	});
+
+	// If the returned value is a Promise, resolve it before returning
+	const output = await Promise.race([
+		delay(2000, () => new Error('Promise resolution timeout')),
+		result,
+	]);
+
+	return output;
 }
 
 // DBus handlers
 createKRunnerInterface({
 	path: '/opl/KRunnerJSEval/JSEval',
-	runHandler(matchID, actionID) {
+	async runHandler(matchID, actionID) {
 		if (matchID === 'js-eval') {
 			reallyEvaling = true;
 
 			try {
-				const result = evalCode(lastCode, currentContext);
+				const result = await evalCode(lastCode, currentContext);
 
 				// $ stores the result of the last operation
 				currentContext.$ = result;
@@ -145,7 +157,7 @@ createKRunnerInterface({
 			if (command && typeof command.execute === 'function') command.execute(matchID, actionID);
 		}
 	},
-	matchHandler(rawQuery) {
+	async matchHandler(rawQuery) {
 		const parsedQuery = /^>(\>?)(.*?)$/.exec(rawQuery);
 
 		if (!parsedQuery) return [];
@@ -165,7 +177,7 @@ createKRunnerInterface({
 		try {
 			lastCode = query;
 
-			const result = evalCode(query, deepClone(currentContext));
+			const result = await evalCode(query, deepClone(currentContext));
 
 			return [['js-eval', util.inspect(result, {
 				depth: Infinity,
