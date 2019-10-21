@@ -5,7 +5,16 @@ This node script allows running JavaScript code from your KRunner. It uses DBus 
 
 ## Installation
 
-In order for KRunner to be aware of this script, you need to link `plasma-runner-js-eval.desktop` to `~/.local/share/kservices5/` or equivalent. You may also need to enable the `JavaScript Eval` runner in KRunner settings.
+This script is currently not being distributed through any means other than this repository. If you want to use it, run the following commands:
+
+```bash
+git clone https://github.com/opl-/plasma-runner-js-eval.git
+cd plasma-runner-js-eval
+npm install
+node index.js
+```
+
+In order for KRunner to be aware of this runner, you need to link `plasma-runner-js-eval.desktop` to `~/.local/share/kservices5/` or equivalent. You may also need to enable the `JavaScript Eval` runner in KRunner settings.
 
 
 ## Usage
