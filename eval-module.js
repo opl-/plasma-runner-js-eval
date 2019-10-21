@@ -44,6 +44,35 @@ function sendNotification({summary = '', body = '', actions = [], timeout = -1})
 	);
 }
 
+// Clipboard handling
+let getClipboardHistoryItemMethod = null;
+let setClipboardContentsMethod = null;
+
+sessionBus.getService('org.kde.klipper').getInterface(
+	'/klipper',
+	'org.kde.klipper.klipper',
+	(err, klipperObject) => {
+		if (err) throw new Error(err);
+
+		getClipboardHistoryItemMethod = klipperObject.getClipboardHistoryItem.bind(klipperObject);
+		setClipboardContentsMethod = klipperObject.setClipboardContents.bind(klipperObject);
+		currentContext.clip = getClipboardHistoryItemMethod;
+	},
+);
+
+function getClipboardItem(index = 0) {
+	return new Promise((resolve, reject) => {
+		getClipboardHistoryItemMethod(index, (err, content) => {
+			if (err) return reject(err);
+			resolve(content);
+		});
+	});
+}
+
+function setClipboardContents(value) {
+	setClipboardContentsMethod(value);
+}
+
 // Sandbox context
 const predefinedGlobals = {
 	$: undefined,
@@ -83,6 +112,28 @@ const predefinedGlobals = {
 		}
 
 		return value;
+	},
+	copy(...args) {
+		const value = args.length <= 1 ? args[0] : args;
+
+		if (reallyEvaling) {
+			let valueStr = '';
+
+			if (['string', 'number'].includes(typeof value)) {
+				valueStr = `${value}`;
+			} else {
+				valueStr = JSON.stringify(value);
+			}
+
+			setClipboardContents(valueStr);
+		}
+
+		return value;
+	},
+	paste(index = 0) {
+		if (typeof index === 'string') index = parseInt(index, 10);
+
+		return getClipboardItem(index);
 	},
 };
 

@@ -74,3 +74,11 @@ Returns a random integer number:
 
 - If `numberB` is specified, between `numberA` and exclusive `numberB`
 - Otherwise between `0` and exclusive `numberA`
+
+### `copy(...args: any) => any | any[]`
+
+Stringifies and puts the passed in argument into the clipboard using Klipper's DBus interface, then returns the argument. If more than one argument is passed, the arguments are treated as a single array, also affecting the return value.
+
+### `paste(index?: number | string) => string`
+
+Returns the clipboard entry at `index` or the most recent entry if `index` cannot be converted into a number.
