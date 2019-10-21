@@ -32,7 +32,7 @@ You can select the JavaScript Eval match to save the result into the `$` variabl
 >$.slice(0, 4)
 ```
 
-Results `'java'` as your result. You can also set global variables and access them in later queries:
+Returns `'java'` as your result. You can also set global variables and access them in later queries:
 
 ```js
 >x = [1, 2]
