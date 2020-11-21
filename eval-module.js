@@ -102,6 +102,17 @@ const predefinedGlobals = {
 		for (let i = 0; i < length; i++) arr.push(callback(i, arr, ...args));
 		return arr;
 	},
+	range(min, max) {
+		if (max === undefined) {
+			max = min;
+			min = 0;
+		}
+		[min, max] = [Math.min(min, max), Math.max(min, max)];
+
+		const arr = [];
+		for (let i = min; i < max; i++) arr.push(i);
+		return arr;
+	},
 	log(...args) {
 		const value = args.length <= 1 ? args[0] : args;
 
