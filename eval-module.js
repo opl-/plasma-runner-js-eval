@@ -141,6 +141,15 @@ const predefinedGlobals = {
 
 		return getClipboardItem(index);
 	},
+	require(what) {
+		return {
+			crypto: () => require('crypto'),
+			path: () => require('path'),
+			querystring: () => require('querystring'),
+			string_decoder: () => require('string_decoder'),
+			url: () => require('url'),
+		}[what]();
+	},
 };
 
 function deepClone(val, processed = []) {
