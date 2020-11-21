@@ -76,6 +76,12 @@ function setClipboardContents(value) {
 // Sandbox context
 const predefinedGlobals = {
 	$: undefined,
+	Buffer,
+	escape,
+	encodeURI,
+	encodeURIComponent,
+	decodeURI,
+	decodeURIComponent,
 	aA(val) {
 		return ('' + val).split('').map((c) => Math.random() < 0.5 ? c : c.toLocaleUpperCase()).join('');
 	},
