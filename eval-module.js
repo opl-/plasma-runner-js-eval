@@ -150,6 +150,12 @@ const predefinedGlobals = {
 			url: () => require('url'),
 		}[what]();
 	},
+	deg(degrees) {
+		return degrees * Math.PI / 180;
+	},
+	rad(radians) {
+		return radians / Math.PI * 180;
+	},
 };
 
 function deepClone(val, processed = []) {
