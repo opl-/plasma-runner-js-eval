@@ -90,3 +90,11 @@ Stringifies and puts the passed in argument into the clipboard using Klipper's D
 ### `paste(index?: number | string) => string`
 
 Returns the clipboard entry at `index` or the most recent entry if `index` cannot be converted into a number.
+
+### `deg(degrees: number) => number`
+
+Converts degrees to radians.
+
+### `rad(radians: number) => number`
+
+Converts radians to degrees.
