@@ -57,6 +57,14 @@ Generates an array by calling the `entryGenerator` function `length` number of t
 - `array` - The array being generated
 - `...args` - List of arguments that were passed to the `makeArr` function after the generator
 
+### `range(start: number, end?: number, step?: number) => number[]`
+
+Generates an array of numbers ranging from `start` to `end`, using the increment of `step`.
+
+If `end` is missing, it defaults to `0`. If `step` is missing or `0`, it defaults to `1` if `end > start`, or `-1` if `end < start`.
+
+If `step` takes takes the range in the direction opposite of `end`, an empty array is returned.
+
 ### `sum(...args: number | string) => number`
 
 Returns the sum of passed items, flattning passed arrays and converting strings into floats.
