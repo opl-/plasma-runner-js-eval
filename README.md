@@ -49,6 +49,16 @@ There's a number of built-in functions to extend functionality and ease writing 
 
 Prints the passed in objects in a notification and returns the passed in arguments. If more than one argument is passed, the arguments are treated as a single array, affecting also the return value.
 
+### `require(what: string) => any`
+
+A limited version of the Node.js `require()` function. `what` specifies the requested module. The allowed modules are:
+
+- `crypto`
+- `path`
+- `querystring`
+- `string_decoder`
+- `url`
+
 ### `makeArr(length: number, entryGenerator: (index: number, array: any[], ...args: any[]) => any, ...args: any) => any[]`
 
 Generates an array by calling the `entryGenerator` function `length` number of times and pushing the returned values into the array. The `entryGenerator` function is called with arguments:
