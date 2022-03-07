@@ -177,6 +177,18 @@ const predefinedGlobals = {
 	rad(radians) {
 		return radians / Math.PI * 180;
 	},
+	morse(text) {
+		const {TO_MORSE, TO_TEXT} = require('./morse');
+
+		// Support usage with string templates
+		if (Array.isArray(text)) text = text[0];
+
+		if (/[\.\-]+( \/ [\.\-]+)*/.test(text)) {
+			return text.split(' ').map((c) => TO_TEXT[c]).join('');
+		} else {
+			return text.split('').map((c) => TO_MORSE[c]).join(' ');
+		}
+	},
 };
 
 function deepClone(val, processed = []) {
