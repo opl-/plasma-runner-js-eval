@@ -77,6 +77,13 @@ function setClipboardContents(value) {
 const predefinedGlobals = {
 	$: undefined,
 	Buffer,
+	CHARS: {
+		alpha: 'abcdefghijklmnopqrstuvwxyz',
+		ALPHA: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+		num: '0123456789',
+		alphanum: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+		base64: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
+	},
 	escape,
 	encodeURI,
 	encodeURIComponent,
