@@ -1,5 +1,5 @@
 [Unit]
-Description=KRunner JavaScript evaluation plugin
+Description=KRunner plugin for JavaScript evaluation
 After=graphical.target
 
 [Install]
