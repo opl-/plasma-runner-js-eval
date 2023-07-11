@@ -65,6 +65,7 @@ node lib/index.js
 
 In order for KRunner to be aware of this runner, you need to link `plasma-runner-js-eval.desktop` to `~/.local/share/kservices5/` or equivalent. You may also need to enable the `JavaScript Eval` runner in KRunner settings.
 
+You can also use the `plasma-runner-js-eval.service` file as a template for a systemd user service. Copy it to `~/.config/systemd/user/` or equivalent, change `/path/to/program` inside to point to the path of this repository, then enable it with `systemctl --user enable plasma-runner-js-eval` to make it start on user login.
 
 ## Usage
 
