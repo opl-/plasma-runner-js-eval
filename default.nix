@@ -1,4 +1,5 @@
-{ pkgs, ... }:
+# Due to using node-gyp, the nodejs version should be the same as the one used by `buildNpmPackage`, as otherwise the native module will likely fail to load.
+{ pkgs, nodejs, ... }:
 pkgs.buildNpmPackage {
   pname = "plasma-runner-js-eval";
   version = "1.0.0";
@@ -31,7 +32,7 @@ pkgs.buildNpmPackage {
 
     # Create a user service.
     substituteInPlace plasma-runner-js-eval.service --replace "/path/to/program" "$out"
-    substituteInPlace plasma-runner-js-eval.service --replace "=node" "=${pkgs.nodejs-18_x}/bin/node"
+    substituteInPlace plasma-runner-js-eval.service --replace "=node" "=${nodejs}/bin/node"
     mkdir -p $out/share/systemd/user
     cp plasma-runner-js-eval.service $out/share/systemd/user
   '';
