@@ -5,7 +5,56 @@ This node script allows running JavaScript code from your KRunner. It uses DBus 
 
 ## Installation
 
-This script is currently not being distributed through any means other than this repository. If you want to use it, run the following commands:
+## NixOS with flakes
+
+To install on a flake-based NixOS system:
+
+```nix
+{
+  inputs = {
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-unstable";
+    };
+    # Add this repository as an input.
+    plasma-runner-js-eval = {
+      url = "github:opl-/plasma-runner-js-eval";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  # Add the input to the arguments.
+  outputs = { self, nixpkgs, plasma-runner-js-eval, ... }: {
+    nixosConfigurations = {
+      hostname = let
+        system = "x86_64-linux";
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./configuration.nix
+            {
+              # Add the package to nixpkgs using an overlay.
+              nixpkgs.overlays = [ plasma-runner-js-eval.overlays.${system} ];
+
+              users.users.opl = {
+                # Add it to user packages.
+                packages = with pkgs; [
+                  plasma-runner-js-eval
+                ];
+              };
+            }
+          ];
+        };
+    };
+  };
+}
+```
+
+After rebuilding the system you can enable the service with `systemctl --user enable plasma-runner-js-eval`.
+
+## Manually
+
+Alternatively, you can install this script manually by running the following commands:
 
 ```bash
 git clone https://github.com/opl-/plasma-runner-js-eval.git

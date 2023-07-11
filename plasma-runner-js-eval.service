@@ -1,0 +1,9 @@
+[Unit]
+Description=KRunner JavaScript evaluation plugin
+After=graphical.target
+
+[Install]
+WantedBy=graphical.target
+
+[Service]
+ExecStart=node /path/to/program/index.js
