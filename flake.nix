@@ -47,7 +47,7 @@
 
             # Copy program and its dependencies to the build output.
             mkdir -p $out
-            cp -r *.js node_modules $out
+            cp -r lib node_modules $out
 
             # Make KRunner able to detect our runner.
             mkdir -p $out/share/kservices5

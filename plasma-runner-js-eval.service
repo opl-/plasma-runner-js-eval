@@ -6,4 +6,4 @@ After=graphical.target
 WantedBy=graphical.target
 
 [Service]
-ExecStart=node /path/to/program/index.js
+ExecStart=node /path/to/program/lib/index.js

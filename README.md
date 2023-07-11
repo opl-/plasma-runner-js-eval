@@ -60,7 +60,7 @@ Alternatively, you can install this script manually by running the following com
 git clone https://github.com/opl-/plasma-runner-js-eval.git
 cd plasma-runner-js-eval
 npm install
-node index.js
+node lib/index.js
 ```
 
 In order for KRunner to be aware of this runner, you need to link `plasma-runner-js-eval.desktop` to `~/.local/share/kservices5/` or equivalent. You may also need to enable the `JavaScript Eval` runner in KRunner settings.

@@ -2,11 +2,11 @@
   "name": "plasma-runner-js-eval",
   "version": "1.0.0",
   "description": "Allows running JavaScript in KRunner",
-  "main": "index.js",
+  "main": "lib/index.js",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node lib/index.js"
   },
   "author": "opl",
   "license": "MIT",
