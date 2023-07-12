@@ -24,7 +24,8 @@
       });
     in
     {
-      packages = forAllSystems ({ pkgs, ... }: {
+      packages = forAllSystems ({ pkgs, ... }: rec {
+        default = plasma-runner-js-eval;
         plasma-runner-js-eval = pkgs.callPackage ./default.nix {};
       });
 
