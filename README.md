@@ -23,23 +23,19 @@ To install on a flake-based NixOS system:
   };
 
   # Add the input to the arguments.
-  outputs = { self, nixpkgs, plasma-runner-js-eval, ... }: {
+  outputs = { nixpkgs, plasma-runner-js-eval, ... }: {
     nixosConfigurations = {
-      hostname = let
-        system = "x86_64-linux";
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
+      hostname = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
           modules = [
-            ./configuration.nix
-            {
+            { pkgs, ... }: {
               # Add the package to nixpkgs using an overlay.
-              nixpkgs.overlays = [ plasma-runner-js-eval.overlays.${system} ];
+              nixpkgs.overlays = [ plasma-runner-js-eval.overlays.default ];
 
               users.users.opl = {
                 # Add it to user packages.
-                packages = with pkgs; [
-                  plasma-runner-js-eval
+                packages = [
+                  pkgs.plasma-runner-js-eval
                 ];
               };
             }

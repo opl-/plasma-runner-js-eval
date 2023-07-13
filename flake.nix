@@ -29,8 +29,10 @@
         plasma-runner-js-eval = pkgs.callPackage ./default.nix {};
       });
 
-      overlays = forAllSystems ({ pkgs, system }: final: prev: {
-        plasma-runner-js-eval = self.packages.${system}.plasma-runner-js-eval;
-      });
+      overlays = {
+        default = final: prev: {
+          plasma-runner-js-eval = self.packages.${prev.system}.plasma-runner-js-eval;
+        };
+      };
     };
 }
