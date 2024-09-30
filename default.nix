@@ -25,10 +25,9 @@ pkgs.buildNpmPackage {
     cp -r lib node_modules $out
 
     # Make KRunner able to detect our runner.
-    mkdir -p $out/share/kservices5
-    # The path should be roughly equivalent to `SERVICES_INSTALL_DIR` of the KDEInstallDirs Extra CMake module.
-    # https://api.kde.org/ecm/kde-module/KDEInstallDirs5.html
-    cp plasma-runner-js-eval.desktop $out/share/kservices5
+    # This path is used by official plasma runners on Nix for both KDE 5 and 6 plugins.
+    mkdir -p $out/share/krunner/dbusplugins
+    cp plasma-runner-js-eval.desktop $out/share/krunner/dbusplugins
 
     # Create a user service.
     substituteInPlace plasma-runner-js-eval.service --replace "/path/to/program" "$out"
