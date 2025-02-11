@@ -11,7 +11,7 @@ pkgs.buildNpmPackage {
   src = ./.;
 
   # Obtained with `prefetch-npm-deps package-lock.json`
-  npmDepsHash = "sha256-4Fz1RmLoP4st7QIawcG/7REkUE3KzJgwjHpLpEmPoag=";
+  npmDepsHash = "sha256-hOP8FmpK2nHFASuuCynVNJWckgh9n9YsZ5DwCKvk0e8=";
 
   # There is no build script.
   dontNpmBuild = true;
