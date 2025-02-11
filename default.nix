@@ -1,21 +1,19 @@
-# Due to using node-gyp, the nodejs version should be the same as the one used by `buildNpmPackage`, as otherwise the native module will likely fail to load.
 { pkgs, nodejs, ... }:
 pkgs.buildNpmPackage {
   pname = "plasma-runner-js-eval";
   version = "1.0.0";
 
-  nativeBuildInputs = with pkgs; [
-    python3 # Needed by node-gyp
-  ];
-
   src = ./.;
 
   # Obtained with `prefetch-npm-deps package-lock.json`
-  npmDepsHash = "sha256-hOP8FmpK2nHFASuuCynVNJWckgh9n9YsZ5DwCKvk0e8=";
+  npmDepsHash = "sha256-nVr4vdTzYrZ9kBkH+yhC/6sZDlHrP+yMEFTv24uPrjg=";
 
   # There is no build script.
   dontNpmBuild = true;
 
+  # dbus-native uses npm package abstract-socket to support unix:abstract DBus path (see envvar DBUS_SESSION_BUS_ADDRESS).
+  # The abstract-socket package is optional, deprecated, and requires node-gyp to install.
+  # We use overrides to replace it work npm:dry-uninstall.
   installPhase = ''
     # Install npm dependencies.
     npm ci

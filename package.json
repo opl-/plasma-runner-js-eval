@@ -12,5 +12,10 @@
   "license": "MIT",
   "dependencies": {
     "dbus-native": "^0.4.0"
+  },
+  "overrides": {
+    "dbus-native": {
+      "abstract-socket": "npm:dry-uninstall"
+    }
   }
 }
