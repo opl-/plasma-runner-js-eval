@@ -31,7 +31,7 @@
 
       overlays = {
         default = final: prev: {
-          plasma-runner-js-eval = self.packages.${prev.system}.plasma-runner-js-eval;
+          plasma-runner-js-eval = self.packages.${prev.stdenv.hostPlatform.system}.plasma-runner-js-eval;
         };
       };
     };
