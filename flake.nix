@@ -34,5 +34,11 @@
           plasma-runner-js-eval = self.packages.${prev.stdenv.hostPlatform.system}.plasma-runner-js-eval;
         };
       };
+
+      nixosModules = rec {
+        # This, frankly, feels cursed. Doesn't this already get passed somehow?
+        plasma-runner-js-eval = import ./nixos-module.nix { overlay = self.overlays.default; };
+        default = plasma-runner-js-eval;
+      };
     };
 }

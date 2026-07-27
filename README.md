@@ -24,29 +24,26 @@ To install on a flake-based NixOS system:
 
   # Add the input to the arguments.
   outputs = { nixpkgs, plasma-runner-js-eval, ... }: {
-    nixosConfigurations = {
-      hostname = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            { pkgs, ... }: {
-              # Add the package to nixpkgs using an overlay.
-              nixpkgs.overlays = [ plasma-runner-js-eval.overlays.default ];
+    nixosConfigurations.hostname = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        # Option 1: Add as a NixOS module.
+        plasma-runner-js-eval.nixosModules.default
+        { pkgs, ... }: {
+          # Enable the service for all users.
+          services.plasma-runner-js-eval.enable = true;
+        }
 
-              users.users.opl = {
-                # Add it to user packages.
-                packages = [
-                  pkgs.plasma-runner-js-eval
-                ];
-              };
-            }
-          ];
-        };
+        # Option 2: Add as a package.
+        { pkgs, ... }: {
+          nixpkgs.overlays = [ plasma-runner-js-eval.overlays.default ];
+          environment.systemPackages = [ pkgs.plasma-runner-js-eval ];
+        }
+      ];
     };
   };
 }
 ```
-
-After rebuilding the system you can enable the service with `systemctl --user enable plasma-runner-js-eval`.
 
 ## Manually
 
