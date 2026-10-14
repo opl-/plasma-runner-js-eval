@@ -18,5 +18,9 @@
     "dbus-native": {
       "abstract-socket": "npm:dry-uninstall"
     }
-  }
+  },
+  "files": [
+    "README.md",
+    "lib/"
+  ]
 }
