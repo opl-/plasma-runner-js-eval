@@ -1,7 +1,14 @@
-{ pkgs, nodejs, ... }:
+{ pkgs, nodejs, lib, ... }:
 pkgs.buildNpmPackage {
   pname = "plasma-runner-js-eval";
   version = "1.0.0";
+
+  meta = {
+    description = "KRunner plugin for JavaScript evaluation";
+    license = lib.licenses.mit;
+    homepage = "https://github.com/opl-/plasma-runner-js-eval#readme";
+    mainProgram = "plasma-runner-js-eval";
+  };
 
   src = ./.;
 
